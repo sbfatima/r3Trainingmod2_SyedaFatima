@@ -1,0 +1,40 @@
+import random
+import pygame
+WIDTH = 800
+HEIGHT = 800
+FPS = 30
+
+#initialize Pygame
+pygame.init()
+pygame.mixer.init()
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Grid")
+clock = pygame.time.Clock()
+
+size = (WIDTH, HEIGHT)
+stack = []
+white = [255, 255, 255]
+black = [0, 0, 0]
+screen.fill(white)
+pygame.display.update()
+print('enter n value for grid')
+n = int(input())
+
+
+def drawgrid(w, rows, surface):
+    sizebtwn = w // rows
+    for i in range(0, w, sizebtwn):
+        x, y = i, i
+        pygame.draw.line(surface, (0, 0, 0), (x, 0), (x, w))
+        pygame.draw.line(surface, (0, 0, 0), (0, y), (w, y))
+
+running = True
+while running:
+    clock.tick(FPS)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+
+    drawgrid(screen.get_width(), n, screen)
+    pygame.display.flip()
